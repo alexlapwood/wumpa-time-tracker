@@ -1,0 +1,91 @@
+@font-face {
+  font-family: "Zoinks";
+  src: url("/fonts/Zoinks.woff");
+}
+
+@font-face {
+  font-family: "Bangers";
+  src: url("./fonts/Bangers.woff2");
+}
+
+@font-face {
+  font-family: "Pacifico";
+  src: url("./fonts/Pacifico.woff2");
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./fonts/Roboto.woff2");
+}
+
+.loading .App {
+  display: none;
+}
+
+html,
+body,
+#root,
+.App {
+  height: 100%;
+}
+
+html {
+  font-size: 8vmin;
+}
+
+html.Zoinks {
+  font-size: 7vmin;
+}
+
+body,
+button {
+  font-family: "Zoinks", "Bangers", sans-serif;
+  color: #fff;
+  text-shadow: 0.07rem 0.07rem 0 #000, 3px 3px 0 #000, -1px -1px 0 #000,
+    1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-transform: uppercase;
+}
+
+span {
+  display: inline-block;
+}
+
+.Zoinks span {
+  transform: translateY(0.1em);
+}
+
+.Zoinks button > span {
+  transform: translateY(0.05em);
+}
+
+button {
+  background: linear-gradient(#f6bb0b, #e55008);
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0.4em 0.5em;
+  box-shadow: var(--backdrop) #752903, var(--shadow) rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+  transform: skew(-10deg, -4deg);
+  text-shadow: 0.07rem 0.07rem 0 #000, 3px 3px 0 #000, -1px -1px 0 #000,
+    1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+button:disabled {
+  background: linear-gradient(#bcbcbc, #6c6c6c);
+  box-shadow: var(--backdrop) #373737;
+  transform: skew(-10deg, -4deg)
+    translate(
+      calc(calc(var(--shadow-x) - var(--backdrop-x)) / 2),
+      calc(calc(var(--shadow-y) - var(--backdrop-y)) / 2)
+    );
+}
+
+:root {
+  --backdrop-x: 0.1rem;
+  --backdrop-y: 0.15rem;
+  --backdrop: var(--backdrop-x) var(--backdrop-y) 0;
+  --shadow-x: 0.3rem;
+  --shadow-y: 0.45rem;
+  --shadow: var(--shadow-x) var(--shadow-y) 0;
+}

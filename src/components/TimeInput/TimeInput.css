@@ -1,0 +1,23 @@
+@keyframes caret-blink {
+  50% {
+    border-right: 2px solid #fff;
+  }
+}
+
+.TimeInput {
+  align-self: center;
+  border-right: 2px solid transparent;
+  cursor: text;
+  font-size: 1.5rem;
+  padding-right: 0.2rem;
+}
+
+.TimeInput:focus-within {
+  animation: caret-blink 1s infinite step-start;
+}
+
+.TimeInput-input {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+}

@@ -1,0 +1,34 @@
+.TimeDisplay {
+  pointer-events: none;
+  text-align: right;
+}
+
+.TimeDisplay-digit {
+  text-align: center;
+  width: 0.55em;
+}
+
+.TimeDisplay--empty {
+  opacity: 0.4;
+  text-shadow: none;
+}
+
+.TimeDisplay-colon {
+  font-family: "Pacifico";
+  line-height: 1;
+  transform: translateY(-0.1em);
+}
+
+.Zoinks .TimeDisplay-digit {
+  width: 0.6em;
+}
+
+.Zoinks .TimeDisplay--empty .TimeDisplay-digit {
+  transform: scaleX(1.5) translateY(0.1em);
+}
+
+.Zoinks .TimeDisplay-colon {
+  font-family: "Zoinks";
+  line-height: normal;
+  transform: translateY(0.1em);
+}

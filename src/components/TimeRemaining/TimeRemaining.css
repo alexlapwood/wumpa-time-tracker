@@ -1,0 +1,9 @@
+.TimeRemaining {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 0.6rem;
+}
+
+.TimeRemaining > span {
+  letter-spacing: 0.05em;
+}
