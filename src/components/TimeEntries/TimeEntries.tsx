@@ -5,7 +5,7 @@ import TimeDisplay from "../TimeDisplay/TimeDisplay";
 
 import StoreContext, { IStoreContext } from "../../contexts/StoreContext";
 
-import { timeToString, waitForFonts } from "../../helpers";
+import { timeToString, waitForFonts, TWindow } from "../../helpers";
 
 import "./TimeEntries.css";
 
@@ -26,6 +26,14 @@ class TimeEntries extends React.PureComponent<TProps> {
 
   public async componentDidMount() {
     window.addEventListener("resize", this.onResize);
+
+    if (navigator.userAgent.indexOf("Safari") > -1) {
+      const visualViewport = (window as TWindow).visualViewport;
+      if (visualViewport) {
+        visualViewport.addEventListener("resize", this.onResize);
+      }
+    }
+
     await waitForFonts();
     setTimeout(this.scrollToBottom);
   }
@@ -38,6 +46,13 @@ class TimeEntries extends React.PureComponent<TProps> {
 
   public componentWillUnmount() {
     window.removeEventListener("resize", this.onResize);
+
+    if (navigator.userAgent.indexOf("Safari") > -1) {
+      const visualViewport = (window as TWindow).visualViewport;
+      if (visualViewport) {
+        visualViewport.removeEventListener("resize", this.onResize);
+      }
+    }
   }
 
   public render() {
@@ -77,7 +92,7 @@ class TimeEntries extends React.PureComponent<TProps> {
     }
   };
 
-  private onResize = () => setTimeout(this.scrollToBottom, 1);
+  private onResize = () => setTimeout(this.scrollToBottom);
 }
 
 function select({ setStore, store }: IStoreContext) {

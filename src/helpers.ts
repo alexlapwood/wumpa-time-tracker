@@ -1,5 +1,8 @@
 import FontFaceObserver from "fontfaceobserver";
 
+export type TWindow = Window &
+  typeof globalThis & { visualViewport?: EventTarget };
+
 const waitForFont = async (fontFamilyName: string) => {
   try {
     await new FontFaceObserver(fontFamilyName).load();

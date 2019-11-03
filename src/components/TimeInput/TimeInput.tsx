@@ -77,7 +77,7 @@ export default class TimeInput extends React.PureComponent<IProps, IState> {
   };
 
   /**
-   * Safari does not resize the viewport when the keyboard comes up.
+   * Safari < 13 does not support window.visualViewport.
    *
    * Scroll the document to the bottom to show the input when it receives focus.
    */

@@ -8,14 +8,16 @@ import Toast from "./components/Toast/Toast";
 
 import StoreContext, { IStore, defaultStore } from "./contexts/StoreContext";
 
+import { waitForFonts, TWindow } from "./helpers";
+
 import * as serviceWorker from "./serviceWorker";
 
 import "./App.css";
-import { waitForFonts } from "./helpers";
 
 class App extends React.Component<{}, IStore> {
   private appRef = React.createRef<HTMLDivElement>();
   private timeInputRef = React.createRef<HTMLInputElement>();
+  private scrollLockInterval: number | undefined;
 
   public state = cloneDeep(defaultStore);
 
@@ -25,10 +27,28 @@ class App extends React.Component<{}, IStore> {
       onUpdate: () => this.notify("Update installed")
     });
 
+    if (navigator.userAgent.indexOf("Safari") > -1) {
+      const visualViewport = (window as TWindow).visualViewport;
+      if (visualViewport) {
+        this.scrollLockInterval = setInterval(this.lockScrolling);
+        visualViewport.addEventListener("resize", this.onResizeSafari);
+      }
+    }
+
     const localStore = localStorage.getItem("wumpa-store");
 
     if (localStore !== null) {
       this.setState(JSON.parse(localStore));
+    }
+  }
+
+  public componentWillUnmount() {
+    if (navigator.userAgent.indexOf("Safari") > -1) {
+      const visualViewport = (window as TWindow).visualViewport;
+      if (visualViewport) {
+        clearInterval(this.scrollLockInterval);
+        visualViewport.removeEventListener("resize", this.onResizeSafari);
+      }
     }
   }
 
@@ -79,6 +99,31 @@ class App extends React.Component<{}, IStore> {
         ]
       });
     }, 100);
+  };
+
+  /**
+   * Safari adds extra space to the bottom of the document when the keyboard is open.
+   *
+   * This method prevents scrolling downwards.
+   */
+  private lockScrolling = () => {
+    const scrollingElement =
+      document.scrollingElement || document.documentElement;
+    if (scrollingElement.scrollTop > 0) {
+      scrollingElement.scrollTop = 0;
+    }
+  };
+
+  /**
+   * Safari does not resize the window when toggling the keyboard, however Safari 13 does support window.viewport
+   */
+  private onResizeSafari = (event: Event) => {
+    const viewport = event.target as (EventTarget & { height: number }) | null;
+    if (viewport) {
+      const scrollingElement = (document.scrollingElement ||
+        document.documentElement) as HTMLElement;
+      scrollingElement.style.height = `${viewport.height}px`;
+    }
   };
 
   private setStore = (newStore: Partial<IStore>) => {
