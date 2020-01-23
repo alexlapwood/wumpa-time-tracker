@@ -8,13 +8,34 @@
       content="width=device-width, initial-scale=1, maximum-scale=1.0"
     />
     <meta name="theme-color" content="#015394" />
-    <meta name="description" content="Wumpa Time tracker for Android, iOS, macOS, and web" />
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon-180.png" />
+    <meta
+      name="description"
+      content="Wumpa Time tracker for Android, iOS, macOS, and web"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="%PUBLIC_URL%/apple-touch-icon-180.png"
+    />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Wumpa Time</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-80637111-2"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-80637111-2");
+    </script>
   </head>
   <body style="background: #0062af; margin: 0;">
     <noscript>You need to enable JavaScript to run this app.</noscript>
