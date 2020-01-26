@@ -17,16 +17,19 @@ export default class TimeDisplay extends React.PureComponent<IProps> {
     const timeString = `${minutes}:${seconds}:${split}`;
     return (
       <div className={cn("TimeDisplay", time === "" && "TimeDisplay--empty")}>
-        {Array.prototype.map.call(timeString, (character, i) => (
-          <span
-            className={
-              character === ":" ? "TimeDisplay-colon" : "TimeDisplay-digit"
-            }
-            key={`${character}${i}`}
-          >
-            {character}
-          </span>
-        ))}
+        {Array.prototype.map.call(
+          timeString,
+          (character: string, i: number) => (
+            <span
+              className={
+                character === ":" ? "TimeDisplay-colon" : "TimeDisplay-digit"
+              }
+              key={`${character}${i}`}
+            >
+              {character}
+            </span>
+          )
+        )}
       </div>
     );
   }

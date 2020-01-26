@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "classnames";
 
-import wumpaImage from "./wumpa.png";
+import wumpaImage from "../../images/wumpa.png";
 
 import "./Toast.scss";
 

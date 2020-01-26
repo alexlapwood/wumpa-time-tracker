@@ -51,7 +51,7 @@ export function isValidTimeString(timeString?: string) {
 
   const time = minutes + seconds + milliseconds;
 
-  return time > 0 && seconds < 60000;
+  return time >= 0 && seconds < 60000;
 }
 
 export function timeFromString(timeString: string) {

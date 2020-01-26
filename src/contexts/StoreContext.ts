@@ -7,6 +7,7 @@ export interface IStore {
     time: number;
   }>;
   timeEntry?: string;
+  wumpaHuntRace?: number;
   times: Array<number>;
 }
 

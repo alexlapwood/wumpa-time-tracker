@@ -7,6 +7,8 @@ import StoreContext, { IStoreContext } from "../../contexts/StoreContext";
 
 import { timeToString, waitForFonts, TWindow } from "../../helpers";
 
+import wumpaImage from "../../images/wumpa.png";
+
 import "./TimeEntries.css";
 
 interface IProps {
@@ -16,7 +18,9 @@ interface IProps {
 
 interface IPropsFromStore {
   removeTime: (index: number) => void;
+  setWumpaHuntRace: (index: number) => void;
   times: string[];
+  wumpaHuntRace: number;
 }
 
 type TProps = IProps & IPropsFromStore;
@@ -60,26 +64,34 @@ class TimeEntries extends React.PureComponent<TProps> {
       <div
         className={cn("TimeEntries", this.props.className)}
         ref={this.scrollRef}
-        style={{
-          background: "#017cc2",
-          display: "grid",
-          overflow: "auto",
-          ...this.props.style
-        }}
+        style={{ ...this.props.style }}
       >
         <div style={{ alignSelf: "end" }}>
-          {this.props.times.map((timeEntry, i) => (
-            <div className="TimeEntries-entry" key={`${i}${timeEntry}`}>
-              <TimeDisplay time={timeEntry} />
-              <button
-                className="TimeEntries-removeEntry"
-                onClick={() => this.props.removeTime(i)}
-                onMouseDown={event => event.preventDefault()} // Prevent the focus event from firing
-              >
-                <span>Remove</span>
-              </button>
-            </div>
-          ))}
+          {this.props.times.map((timeEntry, i) => {
+            const isSelected = i % 6 === this.props.wumpaHuntRace % 6;
+            return (
+              <div className="TimeEntries-entry" key={`${i}${timeEntry}`}>
+                <img
+                  alt=""
+                  className={cn(
+                    "TimeEntries-wumpaHunt",
+                    isSelected && "TimeEntries-wumpaHunt--selected"
+                  )}
+                  onClick={() => this.props.setWumpaHuntRace(i)}
+                  onMouseDown={event => event.preventDefault()} // Prevent the focus event from firing
+                  src={wumpaImage}
+                />
+                <TimeDisplay time={timeEntry} />
+                <button
+                  className="TimeEntries-removeEntry"
+                  onClick={() => this.props.removeTime(i)}
+                  onMouseDown={event => event.preventDefault()} // Prevent the focus event from firing
+                >
+                  <span>Remove</span>
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
     );
@@ -102,7 +114,13 @@ function select({ setStore, store }: IStoreContext) {
         times: [...store.times.filter((_, i) => i !== index)]
       });
     },
-    times: store.times.map(time => timeToString(time))
+    setWumpaHuntRace: (index: number) => {
+      setStore({
+        wumpaHuntRace: index
+      });
+    },
+    times: store.times.map(time => timeToString(time)),
+    wumpaHuntRace: store.wumpaHuntRace || 0
   };
 
   return selectors;

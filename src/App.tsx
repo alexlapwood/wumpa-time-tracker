@@ -5,6 +5,7 @@ import TimeEntries from "./components/TimeEntries/TimeEntries";
 import TimeEntry from "./components/TimeEntry/TimeEntry";
 import TimeRemaining from "./components/TimeRemaining/TimeRemaining";
 import Toast from "./components/Toast/Toast";
+import WumpaHunt from "./components/WumpaHunt/WumpaHunt";
 
 import StoreContext, { IStore, defaultStore } from "./contexts/StoreContext";
 
@@ -63,6 +64,7 @@ class App extends React.Component<{}, IStore> {
         <div
           className="App"
           onFocus={event => {
+            console.log(event.target);
             // Click anywhere to focus on the input
             event.target === this.appRef.current &&
               this.timeInputRef.current &&
@@ -73,6 +75,7 @@ class App extends React.Component<{}, IStore> {
         >
           <div className="Grid">
             <TimeRemaining className="Grid-timeRemaining" />
+            <WumpaHunt className="Grid-wumpaHunt" />
             <TimeEntries className="Grid-timeEntries" />
             <div className="Grid-toasts">
               {this.state.notifications.map((notification, i) => (
