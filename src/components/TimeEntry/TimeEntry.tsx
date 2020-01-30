@@ -42,7 +42,7 @@ export default class TimeEntry extends React.PureComponent<IProps> {
   private submitTime = () => {
     const { store, setStore } = this.context as IStoreContext;
 
-    if (store.timeEntry && isValidTimeString(store.timeEntry)) {
+    if (isValidTimeString(store.timeEntry)) {
       setStore({
         timeEntry: undefined,
         times: [...store.times, timeFromString(store.timeEntry)]

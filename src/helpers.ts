@@ -41,7 +41,10 @@ export const waitForFonts = async () => {
 };
 
 export function isValidTimeString(timeString?: string) {
-  if (timeString === undefined || /\D/g.test(timeString)) {
+  if (timeString === undefined || timeString === "") {
+    return true;
+  }
+  if (/\D/g.test(timeString)) {
     return false;
   }
 
@@ -54,7 +57,10 @@ export function isValidTimeString(timeString?: string) {
   return time >= 0 && seconds < 60000;
 }
 
-export function timeFromString(timeString: string) {
+export function timeFromString(timeString?: string) {
+  if (timeString === undefined || timeString === "") {
+    return 0;
+  }
   const milliseconds = Number(timeString.padStart(2, "0").substr(-2)) * 10;
   const seconds = Number(timeString.padStart(4, "0").substr(-4, 2)) * 1000;
   const minutes = Number(timeString.slice(0, -4)) * 60 * 1000;

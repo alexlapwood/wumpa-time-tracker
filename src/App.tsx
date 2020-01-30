@@ -64,7 +64,6 @@ class App extends React.Component<{}, IStore> {
         <div
           className="App"
           onFocus={event => {
-            console.log(event.target);
             // Click anywhere to focus on the input
             event.target === this.appRef.current &&
               this.timeInputRef.current &&
