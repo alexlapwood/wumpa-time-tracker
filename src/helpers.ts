@@ -59,7 +59,7 @@ export function isValidTimeString(timeString?: string) {
 
 export function timeFromString(timeString?: string) {
   if (timeString === undefined || timeString === "") {
-    return 0;
+    return undefined;
   }
   const milliseconds = Number(timeString.padStart(2, "0").substr(-2)) * 10;
   const seconds = Number(timeString.padStart(4, "0").substr(-4, 2)) * 1000;

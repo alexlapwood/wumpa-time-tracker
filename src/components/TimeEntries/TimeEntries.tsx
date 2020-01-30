@@ -19,7 +19,7 @@ interface IProps {
 interface IPropsFromStore {
   removeTime: (index: number) => void;
   setWumpaHuntRace: (index: number) => void;
-  times: string[];
+  times: Array<string | undefined>;
   wumpaHuntRace: number;
 }
 
@@ -119,7 +119,9 @@ function select({ setStore, store }: IStoreContext) {
         wumpaHuntRace: index
       });
     },
-    times: store.times.map(time => timeToString(time)),
+    times: store.times.map(time =>
+      time !== undefined ? timeToString(time) : undefined
+    ),
     wumpaHuntRace: store.wumpaHuntRace || 0
   };
 

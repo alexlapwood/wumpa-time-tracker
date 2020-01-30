@@ -39,7 +39,11 @@ class App extends React.Component<{}, IStore> {
     const localStore = localStorage.getItem("wumpa-store");
 
     if (localStore !== null) {
-      this.setState(JSON.parse(localStore));
+      const importedStore = JSON.parse(localStore) as IStore;
+      importedStore.times = importedStore.times.map(time =>
+        time === null ? undefined : time
+      );
+      this.setState(importedStore);
     }
   }
 

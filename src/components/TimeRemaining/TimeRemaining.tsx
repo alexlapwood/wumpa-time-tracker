@@ -24,7 +24,13 @@ export default class TimeRemaining extends React.PureComponent<IProps> {
         <span>Time remaining</span>
         <TimeDisplay
           time={timeToString(
-            Math.max(0, store.times.reduce((a, b) => a - b, 30000 * 60))
+            Math.max(
+              0,
+              store.times.reduce(
+                (accumulator: number, time) => accumulator - (time || 0),
+                30000 * 60
+              )
+            )
           )}
         />
       </div>

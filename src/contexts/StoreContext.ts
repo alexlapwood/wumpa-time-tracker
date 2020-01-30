@@ -8,7 +8,7 @@ export interface IStore {
   }>;
   timeEntry?: string;
   wumpaHuntRace?: number;
-  times: Array<number>;
+  times: Array<number | undefined>;
 }
 
 export const defaultStore: IStore = {
