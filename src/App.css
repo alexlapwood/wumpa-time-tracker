@@ -5,8 +5,8 @@
     "wumpa-hunt wumpa-hunt"
     "time-entries time-entries"
     "time-input add-time";
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto 1fr auto auto;
   height: 100%;
 }
 
