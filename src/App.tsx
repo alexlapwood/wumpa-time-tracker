@@ -25,13 +25,15 @@ class App extends React.Component<{}, IStore> {
   public componentDidMount() {
     serviceWorker.register({
       onSuccess: () => this.notify("This app works offline"),
-      onUpdate: () => this.notify("Update installed")
+      onUpdate: () => this.notify("Update installed"),
     });
 
     if (navigator.userAgent.indexOf("Safari") > -1) {
       const visualViewport = (window as TWindow).visualViewport;
       if (visualViewport) {
-        this.scrollLockInterval = setInterval(this.lockScrolling);
+        this.scrollLockInterval = setInterval(
+          this.lockScrolling
+        ) as unknown as number;
         visualViewport.addEventListener("resize", this.onResizeSafari);
       }
     }
@@ -40,7 +42,7 @@ class App extends React.Component<{}, IStore> {
 
     if (localStore !== null) {
       const importedStore = JSON.parse(localStore) as IStore;
-      importedStore.times = importedStore.times.map(time =>
+      importedStore.times = importedStore.times.map((time) =>
         time === null ? undefined : time
       );
       this.setState(importedStore);
@@ -62,12 +64,12 @@ class App extends React.Component<{}, IStore> {
       <StoreContext.Provider
         value={{
           store: this.state,
-          setStore: this.setStore
+          setStore: this.setStore,
         }}
       >
         <div
           className="App"
-          onFocus={event => {
+          onFocus={(event) => {
             // Click anywhere to focus on the input
             event.target === this.appRef.current &&
               this.timeInputRef.current &&
@@ -100,9 +102,9 @@ class App extends React.Component<{}, IStore> {
           ...this.state.notifications,
           {
             message,
-            time: Date.now()
-          }
-        ]
+            time: Date.now(),
+          },
+        ],
       });
     }, 100);
   };

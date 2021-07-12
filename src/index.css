@@ -1,9 +1,4 @@
 @font-face {
-  font-family: "Zoinks";
-  src: url("/fonts/Zoinks.woff");
-}
-
-@font-face {
   font-family: "Bangers";
   src: url("./fonts/Bangers.woff2");
 }
